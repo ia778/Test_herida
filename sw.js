@@ -65,7 +65,7 @@ self.addEventListener("fetch", (event) => {
           const copy = res.clone();
           caches.open(CACHE).then((cache) => cache.put(req, copy)).catch(() => {});
           return res;
-        }).catch(() => cached);
+        }).catch(() => cached || new Response("", { status: 503, statusText: "Sin conexión" }));
       })
     );
   }
